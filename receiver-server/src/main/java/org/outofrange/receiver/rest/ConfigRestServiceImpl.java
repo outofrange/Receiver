@@ -9,17 +9,19 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
 @Path("/config")
-public class ConfigRestService {
+public class ConfigRestServiceImpl implements org.outofrange.receiver.rest.ConfigRestService {
 	private ConfigService service;
 
-	@GET
+	@Override
+    @GET
 	@Path("/qr")
 	@Produces("image/gif")
 	public Response getConfigAsQr() {
 		return Response.ok(service.getConfigAsQr()).build();
 	}
 
-	@GET
+	@Override
+    @GET
 	@Produces("application/json")
 	public Response getConfig() {
 		return Response.ok().entity(new Gson().toJson(service.getConfigDto())).build();

@@ -3,7 +3,7 @@ package org.outofrange.receiver.service;
 import net.glxn.qrgen.QRCode;
 import net.glxn.qrgen.image.ImageType;
 import org.outofrange.receiver.service.dto.ConfigDto;
-import util.Config;
+import org.outofrange.receiver.util.Config;
 
 import java.io.File;
 

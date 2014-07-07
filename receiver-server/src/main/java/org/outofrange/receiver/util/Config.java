@@ -1,4 +1,4 @@
-package util;
+package org.outofrange.receiver.util;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;

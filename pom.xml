@@ -3,8 +3,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.outofrange</groupId>
-    <artifactId>Receiver</artifactId>
-    <packaging>jar</packaging>
+    <artifactId>receiver</artifactId>
+    <packaging>pom</packaging>
     <name>Receiver</name>
     <version>0.1.0-SNAPSHOT</version>
 
@@ -29,65 +29,11 @@
         </plugins>
     </build>
 
-    <dependencies>
-        <!-- Webservice -->
-        <dependency>
-            <groupId>com.sun.jersey</groupId>
-            <artifactId>jersey-bundle</artifactId>
-            <version>${com.sun.jersey.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.jersey</groupId>
-            <artifactId>jersey-json</artifactId>
-            <version>${com.sun.jersey.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.jersey.contribs</groupId>
-            <artifactId>jersey-multipart</artifactId>
-            <version>${com.sun.jersey.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>asm</groupId>
-            <artifactId>asm-commons</artifactId>
-            <version>3.3.1</version>
-        </dependency>
-        <!-- Ende Webservice -->
-
-        <dependency>
-            <groupId>net.glxn</groupId>
-            <artifactId>qrgen</artifactId>
-            <version>1.4</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>2.2.4</version>
-        </dependency>
+    <modules>
+        <module>receiver-server</module>
+        <module>receiver-rest-api</module>
+    </modules>
 
 
-        <!-- LOGGING -->
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-slf4j-impl</artifactId>
-            <version>${org.apache.logging.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>${org.apache.logging.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.7.7</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>jul-to-slf4j</artifactId>
-            <version>1.7.7</version>
-        </dependency>
-    </dependencies>
     <inceptionYear>2014</inceptionYear>
 </project>

@@ -5,18 +5,18 @@ import com.sun.net.httpserver.HttpServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.bridge.SLF4JBridgeHandler;
-import util.Config;
+import org.outofrange.receiver.util.Config;
 
 import javax.swing.*;
 import java.io.IOException;
 
-public class Receiver
+public class ReceiverServer
 {
-	private static final Logger logger = LoggerFactory.getLogger(Receiver.class);
+	private static final Logger logger = LoggerFactory.getLogger(ReceiverServer.class);
 
 	private Config CONFIG = Config.CONFIG;
 
-	public Receiver() {
+	public ReceiverServer() {
 		SLF4JBridgeHandler.removeHandlersForRootLogger();
 		SLF4JBridgeHandler.install();
 		logger.debug("Starte");
@@ -33,6 +33,6 @@ public class Receiver
 	}
 
 	public static void main( String[] args ) {
-		new Receiver();
+		new ReceiverServer();
 	}
 }

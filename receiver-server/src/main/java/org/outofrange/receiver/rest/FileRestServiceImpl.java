@@ -16,21 +16,17 @@ public class FileRestServiceImpl implements FileRestService {
     @GET
 	@Produces(MediaType.APPLICATION_OCTET_STREAM)
 	public Response getFile(@PathParam("fileId") String fileId) {
-		Response.ResponseBuilder response = Response.ok(service.getFile(fileId));
-
-		response.header("Content-Disposition", "attachment; filename=\"" + fileId + "\"");
-
-		return response.build();
+		return Response.ok(service.getFile(fileId)).header("Content-Disposition", "attachment; filename=\"" + fileId + "\"").build();
 	}
 
 	@Override
-    @POST
+    @PUT
 	@Produces(MediaType.TEXT_PLAIN)
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	public Response postFile(@PathParam("fileId") String fileId, @FormDataParam("file") InputStream fileInputStream) throws IOException {
 		service.saveFile(fileInputStream, fileId);
 
-		return Response.status(Response.Status.OK).entity("File saved successfully").build();
+		return Response.ok("File successfully saved").build();
 	}
 
 

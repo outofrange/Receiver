@@ -10,7 +10,7 @@ import javax.ws.rs.core.Response;
 
 @Path("/config")
 public class ConfigRestServiceImpl implements org.outofrange.receiver.rest.ConfigRestService {
-	private ConfigService service;
+	private ConfigService service = new ConfigService();
 
 	@Override
     @GET

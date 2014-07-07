@@ -10,7 +10,7 @@ import java.io.*;
 
 @Path("/file/{fileId}")
 public class FileRestServiceImpl implements FileRestService {
-	private FileService service;
+	private FileService service = new FileService();
 
 	@Override
     @GET

@@ -36,7 +36,7 @@ public class ReceiverServer
 		try {
 			server = HttpServerFactory.create(CONFIG.getServerPath());
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.error("Couldn't start up server", e);
 		}
 		server.start();
 

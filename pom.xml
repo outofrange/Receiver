@@ -11,7 +11,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <com.sun.jersey.version>1.18.1</com.sun.jersey.version>
-        <org.apache.logging.version>2.0-rc1</org.apache.logging.version>
+        <org.apache.logging.version>2.0-rc2</org.apache.logging.version>
     </properties>
 
 
@@ -26,12 +26,18 @@
                     <target>1.7</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.2</version>
+            </plugin>
         </plugins>
     </build>
 
     <modules>
         <module>receiver-server</module>
         <module>receiver-rest-api</module>
+        <module>receiver-client</module>
     </modules>
 
 

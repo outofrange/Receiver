@@ -12,7 +12,7 @@ import javax.ws.rs.core.Response;
 public class ConfigRestServiceImpl implements org.outofrange.receiver.rest.ConfigRestService {
 	private ConfigService service = new ConfigService();
 
-	@Override
+    @Override
     @GET
 	@Path("/qr")
 	@Produces("image/gif")
@@ -20,7 +20,7 @@ public class ConfigRestServiceImpl implements org.outofrange.receiver.rest.Confi
 		return Response.ok(service.getConfigAsQr()).build();
 	}
 
-	@Override
+    @Override
     @GET
 	@Produces("application/json")
 	public Response getConfig() {

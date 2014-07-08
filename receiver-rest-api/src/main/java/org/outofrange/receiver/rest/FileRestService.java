@@ -11,6 +11,7 @@ import java.io.InputStream;
 /**
  * Created by morg on 07.07.14.
  */
+@Path("/file/{fileId}")
 public interface FileRestService {
     @GET
     @Produces(MediaType.APPLICATION_OCTET_STREAM)

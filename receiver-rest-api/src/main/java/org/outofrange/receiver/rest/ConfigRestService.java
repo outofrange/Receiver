@@ -8,6 +8,7 @@ import javax.ws.rs.core.Response;
 /**
  * Created by morg on 07.07.14.
  */
+@Path("/config")
 public interface ConfigRestService {
     @GET
     @Path("/qr")

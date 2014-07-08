@@ -14,8 +14,8 @@ import java.util.Calendar;
  *         Created on 07.07.2014.
  */
 public class FileWatcher implements Runnable {
-    private final Config CONFIG = Config.CONFIG;
-    private final String path = CONFIG.getProperty("upload");
+    private final int cachedMinutes = Integer.valueOf(Config.CONFIG.getProperty("cachedminutes"));
+    private final String path = Config.CONFIG.getProperty("upload");
 
     @Override
     public void run() {
@@ -43,6 +43,6 @@ public class FileWatcher implements Runnable {
 
     private boolean oldEnough(long time) {
         long now = Calendar.getInstance().getTimeInMillis();
-        return now - time >= Long.valueOf(CONFIG.getProperty("cachedminutes")) * 60 * 1000;
+        return now - time >= Long.valueOf(cachedMinutes * 60 * 1000);
     }
 }

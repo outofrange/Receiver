@@ -18,27 +18,6 @@ public class FileRestService {
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     public Response postFile(@PathParam("fileName") String fileId, @FormDataParam("file") InputStream fileInputStream) {
-        try {
-            saveFile(fileInputStream, fileId);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return Response.ok("File successfully saved").build();
+        return Response.ok("File successfully saved (more or less)").build();
     }
-
-    private void saveFile(InputStream uploadedInputStream,  String serverLocation) throws IOException {
-        try(OutputStream outputStream = new FileOutputStream(new File(serverLocation))) {
-            int read;
-            byte[] bytes = new byte[1024];
-
-            while ((read = uploadedInputStream.read(bytes)) != -1) {
-                outputStream.write(bytes, 0, read);
-            }
-
-            outputStream.flush();
-        }
-    }
-
-
 }

@@ -14,10 +14,10 @@ import java.io.*;
 @Path("/file")
 public class FileRestService {
     @PUT
-    @Path("/{fileId}")
+    @Path("/{fileName}")
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.MULTIPART_FORM_DATA)
-    public Response postFile(@PathParam("fileId") String fileId, @FormDataParam("file") InputStream fileInputStream) {
+    public Response postFile(@PathParam("fileName") String fileId, @FormDataParam("file") InputStream fileInputStream) {
         try {
             saveFile(fileInputStream, fileId);
         } catch (IOException e) {

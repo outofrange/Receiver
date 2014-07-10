@@ -3,9 +3,8 @@ package org.outofrange.receiver.client;
 import org.apache.cxf.jaxrs.client.JAXRSClientFactoryBean;
 import org.outofrange.receiver.rest.FileRestService;
 
-import javax.xml.bind.JAXBContext;
 import java.io.File;
-import java.net.URI;
+import java.io.IOException;
 
 /**
  * Created by morg on 07.07.14.
@@ -21,15 +20,14 @@ public class Receiver {
     }
 
     public File getFile(String fileId) {
-        return (File) service.getFile(fileId).getEntity();
+        return service.getFile(fileId).readEntity(File.class);
     }
 
-    public void sendFile(String fileId, File file) {
+    public void sendFile(String fileId, File file) throws IOException {
 
     }
 
     public static void main(String[] bla) {
-        Receiver r = new Receiver("localhost", "9090");
-        r.getFile("123");
+
     }
 }

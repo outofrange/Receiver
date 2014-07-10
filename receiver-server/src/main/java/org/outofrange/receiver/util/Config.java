@@ -1,5 +1,8 @@
 package org.outofrange.receiver.util;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.util.Properties;
@@ -10,24 +13,18 @@ import java.util.Properties;
 public enum Config {
 	CONFIG;
 
+    private final Logger logger;
 	private Properties properties;
 
 	Config() {
+        logger = LoggerFactory.getLogger(Config.class);
+
 		properties = new Properties();
-		BufferedInputStream stream = null;
-		try {
-			stream = new BufferedInputStream(ClassLoader.getSystemResourceAsStream("default.properties"));
+
+		try( BufferedInputStream stream = new BufferedInputStream(ClassLoader.getSystemResourceAsStream("default.properties"))) {
 			properties.load(stream);
 		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (stream != null) {
-                    stream.close();
-                }
-			} catch (IOException e) {
-				// ignore
-			}
+			logger.error("Couldn't load config file /o\\", e);
 		}
 	}
 

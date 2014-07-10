@@ -6,7 +6,7 @@ import org.outofrange.receiver.service.ConfigService;
 import javax.ws.rs.core.Response;
 
 
-public class ConfigRestServiceImpl implements org.outofrange.receiver.rest.ConfigRestService {
+public class ConfigRestServiceImpl implements ConfigRestService {
 	private ConfigService service = new ConfigService();
 
     @Override

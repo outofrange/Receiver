@@ -13,6 +13,7 @@
         <com.glassfish.jersey.version>2.1</com.glassfish.jersey.version>
         <org.apache.logging.version>2.0-rc2</org.apache.logging.version>
         <org.slf4j.version>1.7.7</org.slf4j.version>
+        <javax.ws.rs-api.version>2.0</javax.ws.rs-api.version>
     </properties>
 
 

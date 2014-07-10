@@ -10,8 +10,9 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <com.sun.jersey.version>2.1</com.sun.jersey.version>
+        <com.glassfish.jersey.version>2.1</com.glassfish.jersey.version>
         <org.apache.logging.version>2.0-rc2</org.apache.logging.version>
+        <org.slf4j.version>1.7.7</org.slf4j.version>
     </properties>
 
 
@@ -20,6 +21,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
                 <inherited>true</inherited>
                 <configuration>
                     <source>1.7</source>
@@ -29,7 +31,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>2.2</version>
+                <version>2.5</version>
             </plugin>
         </plugins>
     </build>

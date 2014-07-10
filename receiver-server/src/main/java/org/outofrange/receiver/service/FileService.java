@@ -1,6 +1,8 @@
 package org.outofrange.receiver.service;
 
+import org.outofrange.receiver.exceptions.ServerException;
 import org.outofrange.receiver.util.Config;
+import org.outofrange.receiver.util.Validator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,8 +15,9 @@ public class FileService {
     private static final Logger logger = LoggerFactory.getLogger(FileService.class);
     private final Config config = Config.CONFIG;
 
-	public void saveFile(InputStream uploadedInputStream,  String fileName) throws IOException {
+	public void saveFile(InputStream uploadedInputStream,  String fileName) {
         logger.debug("Saving file " + fileName);
+        Validator.noSpecialCharacters(fileName);
 
 		try(OutputStream outputStream = new FileOutputStream(new File(fileName))) {
 			int read;
@@ -25,10 +28,15 @@ public class FileService {
 			}
 
 			outputStream.flush();
-		}
+		} catch (IOException e) {
+            throw new ServerException("Couldn't save file", e);
+        }
 	}
 
-	public File getFile(String path) {
-		return new File(config.getProperty("upload") + "/" + path);
+	public File getFile(String fileName) {
+        logger.debug("Retrieving file " + fileName);
+        Validator.noSpecialCharacters(fileName);
+
+		return new File(config.getProperty("upload") + "/" + fileName);
 	}
 }

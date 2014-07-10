@@ -4,7 +4,6 @@ package org.outofrange.receiver.rest;
 import org.outofrange.receiver.service.FileService;
 
 import javax.ws.rs.core.Response;
-import java.io.IOException;
 import java.io.InputStream;
 
 public class FileRestServiceImpl implements FileRestService {
@@ -16,7 +15,7 @@ public class FileRestServiceImpl implements FileRestService {
     }
 
     @Override
-    public Response postFile(String fileId, InputStream fileInputStream) throws IOException {
+    public Response postFile(String fileId, InputStream fileInputStream) {
         service.saveFile(fileInputStream, fileId);
 
         return Response.ok("File successfully saved").build();

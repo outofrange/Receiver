@@ -1,7 +1,8 @@
 package org.outofrange.receiver;
 
-import com.sun.jersey.api.container.httpserver.HttpServerFactory;
-import com.sun.net.httpserver.HttpServer;
+
+import org.glassfish.grizzly.http.server.HttpServer;
+import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.outofrange.receiver.watcher.FileWatcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +11,7 @@ import org.outofrange.receiver.util.Config;
 
 import javax.swing.*;
 import java.io.IOException;
+import java.net.URI;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -32,19 +34,20 @@ public class ReceiverServer
         final ScheduledFuture<?> watcherHandle = scheduler.scheduleAtFixedRate(watcher, 10, 10, TimeUnit.SECONDS);
 
 
-		HttpServer server = null;
-		try {
-			server = HttpServerFactory.create(CONFIG.getServerPath());
-		} catch (IOException e) {
-			logger.error("Couldn't start up server", e);
-		}
-		server.start();
+		HttpServer server = GrizzlyHttpServerFactory.createHttpServer(URI.create(CONFIG.getProperty("address")));
 
-		JOptionPane.showMessageDialog(null, "Ende");
+        try {
+            server.start();
+        } catch (IOException e) {
+            logger.error("Couldn't start server", e);
+        }
 
-		server.stop(0);
+        JOptionPane.showMessageDialog(null, "Ende");
+
+		server.stop();
         watcherHandle.cancel(true);
 	}
+
     public static void main( String[] args ) {
 		new ReceiverServer();
 	}

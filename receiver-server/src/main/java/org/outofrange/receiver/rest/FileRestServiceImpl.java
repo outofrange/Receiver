@@ -1,6 +1,7 @@
 package org.outofrange.receiver.rest;
 
-import com.sun.jersey.multipart.FormDataParam;
+
+import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.outofrange.receiver.service.FileService;
 
 import javax.ws.rs.*;

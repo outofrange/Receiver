@@ -13,8 +13,6 @@ public enum Config {
 
 	private Properties properties;
 
-	private String configPath = "";
-
 	Config() {
 		properties = new Properties();
 		BufferedInputStream stream = null;
@@ -25,15 +23,13 @@ public enum Config {
 			e.printStackTrace();
 		} finally {
 			try {
-				stream.close();
-			} catch (IOException | NullPointerException e) {
+				if (stream != null) {
+                    stream.close();
+                }
+			} catch (IOException e) {
 				// ignore
 			}
 		}
-	}
-
-	public String getServerPath() {
-		return "http://" + CONFIG.getProperty("host") + ":" + CONFIG.getProperty("port") + "/";
 	}
 
 	public String getProperty(String key) {

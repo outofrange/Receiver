@@ -1,6 +1,8 @@
 package org.outofrange.receiver.rest;
 
-import com.sun.jersey.multipart.FormDataParam;
+
+
+import org.glassfish.jersey.media.multipart.FormDataParam;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -9,7 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * Created by morg on 07.07.14.
+ * @author outofrange
  */
 @Path("/file/{fileId}")
 public interface FileRestService {

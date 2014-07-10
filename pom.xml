@@ -10,7 +10,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <com.sun.jersey.version>1.18.1</com.sun.jersey.version>
+        <com.sun.jersey.version>2.1</com.sun.jersey.version>
         <org.apache.logging.version>2.0-rc2</org.apache.logging.version>
     </properties>
 

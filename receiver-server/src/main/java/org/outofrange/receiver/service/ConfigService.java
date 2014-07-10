@@ -12,13 +12,13 @@ import java.net.URI;
  * @author outofrange
  */
 public class ConfigService {
-	private final Config CONFIG = Config.CONFIG;
+	private final Config config = Config.CONFIG;
 
 	public File getConfigAsQr() {
 		return QRCode.from(getConfigDto().toString()).to(ImageType.GIF).file();
 	}
 
 	public ConfigDto getConfigDto() {
-		return new ConfigDto(URI.create(CONFIG.getProperty("address")));
+		return new ConfigDto(URI.create(config.getProperty("address")));
 	}
 }

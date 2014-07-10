@@ -24,7 +24,7 @@ import java.util.concurrent.TimeUnit;
 public class ReceiverServer {
     private static final Logger logger = LoggerFactory.getLogger(ReceiverServer.class);
 
-    private Config CONFIG = Config.CONFIG;
+    private Config config = Config.CONFIG;
 
     public ReceiverServer() {
         logger.debug("Installing slf4j root logger handler");
@@ -39,7 +39,7 @@ public class ReceiverServer {
 
         ResourceConfig resourceConfig = new ResourceConfig();
         resourceConfig.registerClasses(FileRestServiceImpl.class, ConfigRestServiceImpl.class, MultiPartFeature.class);
-        HttpServer server = GrizzlyHttpServerFactory.createHttpServer(URI.create(CONFIG.getProperty("address")), resourceConfig);
+        HttpServer server = GrizzlyHttpServerFactory.createHttpServer(URI.create(config.getProperty("address")), resourceConfig);
 
         try {
             server.start();

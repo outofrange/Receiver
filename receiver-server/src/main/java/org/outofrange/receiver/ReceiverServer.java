@@ -12,13 +12,13 @@ import org.outofrange.receiver.watcher.FileWatcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.bridge.SLF4JBridgeHandler;
+import sun.misc.Signal;
+import sun.misc.SignalHandler;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.net.URI;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 public class ReceiverServer {
@@ -32,14 +32,13 @@ public class ReceiverServer {
         SLF4JBridgeHandler.install();
         logger.info("Starting server");
 
-
         final Runnable watcher = new FileWatcher();
-        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-        final ScheduledFuture<?> watcherHandle = scheduler.scheduleAtFixedRate(watcher, 10, 10, TimeUnit.SECONDS);
+        final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+        scheduler.scheduleAtFixedRate(watcher, 10, 10, TimeUnit.SECONDS);
 
         ResourceConfig resourceConfig = new ResourceConfig();
         resourceConfig.registerClasses(FileRestServiceImpl.class, ConfigRestServiceImpl.class, MultiPartFeature.class);
-        HttpServer server = GrizzlyHttpServerFactory.createHttpServer(URI.create(config.getProperty("address")), resourceConfig);
+        final HttpServer server = GrizzlyHttpServerFactory.createHttpServer(URI.create(config.getProperty("address")), resourceConfig);
 
         try {
             server.start();
@@ -47,12 +46,17 @@ public class ReceiverServer {
             logger.error("Couldn't start server", e);
         }
 
-        JOptionPane.showMessageDialog(null, "Ende");
-
-        logger.info("Stopping server.");
-        server.stop();
-        watcherHandle.cancel(true);
-        logger.debug("Stopped server - quitting");
+        SignalHandler handler = new SignalHandler() {
+            @Override
+            public void handle(Signal signal) {
+                logger.info("Stopping server.");
+                server.stop();
+                scheduler.shutdown();
+                logger.debug("Stopped server - quitting");
+            }
+        };
+        Signal.handle(new Signal("INT"), handler);
+        Signal.handle(new Signal("TERM"), handler);
     }
 
     public static void main(String[] args) {

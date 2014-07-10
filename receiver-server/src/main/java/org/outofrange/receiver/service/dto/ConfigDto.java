@@ -1,31 +1,23 @@
 package org.outofrange.receiver.service.dto;
 
-import java.net.URL;
+import java.net.URI;
 
 /**
- * @author extmoesl
- *         Created on 07.07.2014.
+ * @author outofrange
  */
 public class ConfigDto {
-	private String host;
-	private String port;
-	private URL url;
+	private URI uri;
 
-	public ConfigDto(String host, String port) {
-		this.host = host;
-		this.port = port;
+	public ConfigDto(URI uri) {
+		this.uri = uri;
 	}
 
-	public String getHost() {
-		return host;
-	}
-
-	public String getPort() {
-		return port;
+	public URI getUri() {
+		return uri;
 	}
 
 	@Override
 	public String toString() {
-		return "http://" + host + ":" + port;
+		return uri.toString();
 	}
 }

@@ -6,10 +6,10 @@ import org.outofrange.receiver.service.dto.ConfigDto;
 import org.outofrange.receiver.util.Config;
 
 import java.io.File;
+import java.net.URI;
 
 /**
- * @author extmoesl
- *         Created on 07.07.2014.
+ * @author outofrange
  */
 public class ConfigService {
 	private final Config CONFIG = Config.CONFIG;
@@ -19,6 +19,6 @@ public class ConfigService {
 	}
 
 	public ConfigDto getConfigDto() {
-		return new ConfigDto(CONFIG.getProperty("host"), CONFIG.getProperty("port"));
+		return new ConfigDto(URI.create(CONFIG.getProperty("address")));
 	}
 }

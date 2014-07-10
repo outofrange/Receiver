@@ -19,7 +19,7 @@ public interface FileRestService {
     @Produces(MediaType.APPLICATION_OCTET_STREAM)
     Response getFile(@PathParam("fileId") String fileId);
 
-    @POST
+    @PUT
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     Response postFile(@PathParam("fileId") String fileId, @FormDataParam("file") InputStream fileInputStream) throws IOException;

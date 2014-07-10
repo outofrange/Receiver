@@ -1,14 +1,22 @@
 package org.outofrange.receiver.service;
 
+import org.outofrange.receiver.util.Config;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.*;
 
 /**
- * @author extmoesl
- *         Created on 07.07.2014.
+ * @author outofrange
  */
 public class FileService {
-	public void saveFile(InputStream uploadedInputStream,  String serverLocation) throws IOException {
-		try(OutputStream outputStream = new FileOutputStream(new File(serverLocation))) {
+    private static final Logger logger = LoggerFactory.getLogger(FileService.class);
+    private final Config config = Config.CONFIG;
+
+	public void saveFile(InputStream uploadedInputStream,  String fileName) throws IOException {
+        logger.debug("Saving file " + fileName);
+
+		try(OutputStream outputStream = new FileOutputStream(new File(fileName))) {
 			int read;
 			byte[] bytes = new byte[1024];
 
@@ -21,6 +29,6 @@ public class FileService {
 	}
 
 	public File getFile(String path) {
-		return new File(path);
+		return new File(config.getProperty("upload") + "/" + path);
 	}
 }

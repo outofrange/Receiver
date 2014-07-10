@@ -5,8 +5,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 /**
- * @author extmoesl
- *         Created on 07.07.2014.
+ * @author outofrange
  */
 public enum Config {
 	CONFIG;

@@ -19,8 +19,9 @@ public class FileService {
         logger.debug("Saving file " + fileName);
         Validator.noSpecialCharacters(fileName);
 
-		try(OutputStream outputStream = new FileOutputStream(new File(fileName))) {
-			int read;
+        try (OutputStream outputStream = new FileOutputStream(new File(config.getProperty("upload") + "/" + fileName))) {
+
+            int read;
 			byte[] bytes = new byte[1024];
 
 			while ((read = uploadedInputStream.read(bytes)) != -1) {

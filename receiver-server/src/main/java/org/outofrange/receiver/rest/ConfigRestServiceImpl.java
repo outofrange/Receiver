@@ -7,7 +7,7 @@ import javax.ws.rs.core.Response;
 
 
 public class ConfigRestServiceImpl implements ConfigRestService {
-	private ConfigService service = new ConfigService();
+    private final ConfigService service = new ConfigService();
 
     @Override
 	public Response getConfigAsQr() {

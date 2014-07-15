@@ -10,38 +10,21 @@ import java.util.Scanner;
 /**
  * @author outofrange
  */
+@SuppressWarnings("WeakerAccess")
 public class Receiver {
     private static final String CRLF = "\r\n";
     private static final String BOUNDARY_START = "--";
     private static final String BOUNDARY = Long.toHexString(System.currentTimeMillis());
     private static final String CHARSET = "UTF-8";
 
-    private URL url;
+    private final URL url;
 
     public Receiver(URL url) {
         this.url = url;
     }
 
-    public static void main(String[] bla) {
-        try {
-            Receiver receiver = new Receiver(URI.create("http://localhost:9090").toURL());
-            receiver.sendFile(new File("/bin/bash"));
-            System.out.println(receiver.getFileContent("bash"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     public void sendFile(File file) throws IOException {
         sendFile(file, file.getName());
-    }
-
-    public String getFileContent(String fileId) throws IOException {
-        String encodedFileId = URLEncoder.encode(fileId, CHARSET);
-        URLConnection connection = appendToUrl(url, RestPaths.FILE, RestPaths.DELIMITER,
-                encodedFileId).openConnection();
-
-        return convertStreamToString(connection.getInputStream());
     }
 
     public void sendFile(File file, String fileId) throws IOException {
@@ -79,6 +62,14 @@ public class Receiver {
         }
 
         return new URL(s.toString());
+    }
+
+    public String getFileContent(String fileId) throws IOException {
+        String encodedFileId = URLEncoder.encode(fileId, CHARSET);
+        URLConnection connection = appendToUrl(url, RestPaths.FILE, RestPaths.DELIMITER,
+                encodedFileId).openConnection();
+
+        return convertStreamToString(connection.getInputStream());
     }
 
     private static String convertStreamToString(InputStream is) {

@@ -21,10 +21,9 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+@SuppressWarnings("WeakerAccess")
 public class ReceiverServer {
     private static final Logger logger = LoggerFactory.getLogger(ReceiverServer.class);
-
-    private Config config = Config.CONFIG;
 
     public ReceiverServer() {
         logger.debug("Installing slf4j root logger handler");
@@ -38,7 +37,8 @@ public class ReceiverServer {
 
         ResourceConfig resourceConfig = new ResourceConfig();
         resourceConfig.registerClasses(FileRestServiceImpl.class, ConfigRestServiceImpl.class, MultiPartFeature.class);
-        final HttpServer server = GrizzlyHttpServerFactory.createHttpServer(URI.create(config.getProperty("address")), resourceConfig);
+        final HttpServer server = GrizzlyHttpServerFactory.createHttpServer(URI.create(Config.CONFIG.getProperty
+                ("address")), resourceConfig);
 
         try {
             server.start();

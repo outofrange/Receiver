@@ -7,7 +7,7 @@ import javax.ws.rs.core.Response;
 import java.io.InputStream;
 
 public class FileRestServiceImpl implements FileRestService {
-    private FileService service = new FileService();
+    private final FileService service = new FileService();
 
     @Override
     public Response getFile(String fileName) {

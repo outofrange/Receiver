@@ -6,10 +6,10 @@ import java.net.URI;
  * @author outofrange
  */
 public class ConfigDto {
-	private URI uri;
+    private final URI uri;
 
-	public ConfigDto(URI uri) {
-		this.uri = uri;
+    public ConfigDto(URI uri) {
+        this.uri = uri;
 	}
 
 	public URI getUri() {

@@ -1,26 +1,25 @@
 package org.outofrange.receiver.rest;
 
 
-
 import org.glassfish.jersey.media.multipart.FormDataParam;
+import org.outofrange.receiver.RestPaths;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.io.IOException;
 import java.io.InputStream;
 
 /**
  * @author outofrange
  */
-@Path("/file/{fileId}")
+@Path(RestPaths.FILE + "/{fileId}")
 public interface FileRestService {
     @GET
     @Produces(MediaType.APPLICATION_OCTET_STREAM)
     Response getFile(@PathParam("fileId") String fileId);
 
-    @PUT
+    @POST
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.MULTIPART_FORM_DATA)
-    Response postFile(@PathParam("fileId") String fileId, @FormDataParam("file") InputStream fileInputStream) throws IOException;
+    Response postFile(@PathParam("fileId") String fileId, @FormDataParam(RestPaths.FILE_PARAM_NAME) InputStream fileInputStream);
 }

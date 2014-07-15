@@ -39,8 +39,8 @@
 
     <modules>
         <module>receiver-server</module>
-        <module>receiver-rest-api</module>
         <module>receiver-client</module>
+        <module>receiver-shared</module>
     </modules>
 
 

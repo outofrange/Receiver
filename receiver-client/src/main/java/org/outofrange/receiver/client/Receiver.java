@@ -10,7 +10,6 @@ import java.util.Scanner;
 /**
  * @author outofrange
  */
-@SuppressWarnings("WeakerAccess")
 public class Receiver {
     private static final String CRLF = "\r\n";
     private static final String BOUNDARY_START = "--";

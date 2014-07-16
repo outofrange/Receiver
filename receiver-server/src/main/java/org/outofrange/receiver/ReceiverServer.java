@@ -21,7 +21,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-@SuppressWarnings("WeakerAccess")
 public class ReceiverServer {
     private static final Logger logger = LoggerFactory.getLogger(ReceiverServer.class);
 

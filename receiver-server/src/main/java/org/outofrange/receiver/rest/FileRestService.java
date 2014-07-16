@@ -21,5 +21,5 @@ public interface FileRestService {
     @POST
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.MULTIPART_FORM_DATA)
-    Response postFile(@PathParam("fileId") String fileId, @FormDataParam(RestPaths.FILE_PARAM_NAME) InputStream fileInputStream);
+    Response postFile(@FormDataParam(RestPaths.FILE_PARAM_NAME) InputStream fileInputStream, @PathParam("fileName") String fileName);
 }

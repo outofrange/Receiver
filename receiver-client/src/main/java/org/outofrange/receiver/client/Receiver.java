@@ -26,8 +26,8 @@ public class Receiver {
         sendFile(file, file.getName());
     }
 
-    public void sendFile(File file, String fileId) throws IOException {
-        String encodedFileId = URLEncoder.encode(fileId, CHARSET);
+    public void sendFile(File file, String fileName) throws IOException {
+        String encodedFileId = URLEncoder.encode(fileName, CHARSET);
 
         URLConnection connection = appendToUrl(url, RestPaths.FILE, RestPaths.DELIMITER,
                 encodedFileId).openConnection();

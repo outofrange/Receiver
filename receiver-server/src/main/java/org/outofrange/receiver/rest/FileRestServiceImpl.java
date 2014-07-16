@@ -15,8 +15,8 @@ public class FileRestServiceImpl implements FileRestService {
     }
 
     @Override
-    public Response postFile(String fileId, InputStream fileInputStream) {
-        service.saveFile(fileInputStream, fileId);
+    public Response postFile(InputStream fileInputStream, String fileName) {
+        service.saveFile(fileInputStream, fileName);
 
         return Response.ok("File successfully saved").build();
     }

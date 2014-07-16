@@ -5,7 +5,6 @@ import org.outofrange.receiver.RestPaths;
 import java.io.*;
 import java.net.*;
 import java.nio.file.Files;
-import java.util.Scanner;
 
 /**
  * @author outofrange
@@ -23,15 +22,15 @@ public class Receiver {
     }
 
 	/**
-	 * Send a file to the remote server. Receiver will choose a filename by itself.
+	 * Send a file to the remote server. Receiver will choose a filename by itself -
+	 * current implementation is using md5, so this could take a short while for calculating
 	 * @param file A reference to the existing, local file
 	 * @return The name of the remote file
 	 * @throws IOException An IOException is thrown either if the file could not be read locally,
 	 * something was wrong with the URL/connection or the server didn't respond with 200
 	 */
     public String sendFile(File file) throws IOException {
-		// TODO use something like toBase64(SHA1(file))
-		final String fileName = file.getName();
+		final String fileName = ReceiverHelper.md5(file);
 		sendFile(file, fileName);
 
 		return fileName;
@@ -49,8 +48,8 @@ public class Receiver {
     public void sendFile(File file, String fileName) throws IOException {
         String encodedFileId = URLEncoder.encode(fileName, CHARSET);
 
-        URLConnection connection = appendToUrl(url, RestPaths.FILE, RestPaths.DELIMITER,
-                encodedFileId).openConnection();
+        URLConnection connection = ReceiverHelper.appendToUrl(url, RestPaths.FILE, RestPaths.DELIMITER,
+				encodedFileId).openConnection();
         connection.setDoOutput(true);
         connection.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + BOUNDARY);
 
@@ -73,16 +72,6 @@ public class Receiver {
         }
     }
 
-    private static URL appendToUrl(URL url, String... paths) throws MalformedURLException {
-        StringBuilder s = new StringBuilder(url.toString());
-
-        for (String path : paths) {
-            s.append(path);
-        }
-
-        return new URL(s.toString());
-    }
-
 	/**
 	 * Query the server for a remote file
 	 * @param fileName The name of the remote file
@@ -91,14 +80,16 @@ public class Receiver {
 	 */
     public String getFileContent(String fileName) throws IOException {
         String encodedFileId = URLEncoder.encode(fileName, CHARSET);
-        URLConnection connection = appendToUrl(url, RestPaths.FILE, RestPaths.DELIMITER,
-                encodedFileId).openConnection();
+        URLConnection connection = ReceiverHelper.appendToUrl(url, RestPaths.FILE, RestPaths.DELIMITER,
+				encodedFileId).openConnection();
 
-        return convertStreamToString(connection.getInputStream());
+		final InputStream inputStream = connection.getInputStream();
+		final String s = ReceiverHelper.convertStreamToString(inputStream);
+		inputStream.close();
+		return s;
     }
 
-    private static String convertStreamToString(InputStream is) {
-        Scanner s = new Scanner(is).useDelimiter("\\A");
-        return s.hasNext() ? s.next() : "";
-    }
+	public static void main(String[] bla) throws IOException {
+		System.out.println(ReceiverHelper.md5(new File("Receiver.iml")));
+	}
 }

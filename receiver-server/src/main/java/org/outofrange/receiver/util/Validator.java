@@ -14,4 +14,10 @@ public class Validator {
             throw new ValidatorException("You must use normal, alphanumeric characters! One dot, followed by other alphanumeric characters is allowed.");
         }
     }
+
+	public static void notLongerThan(String s, int length) {
+		if (s == null || s.length() > length) {
+			throw new ValidatorException("Your string is longer than " + length + " characters!");
+		}
+	}
 }

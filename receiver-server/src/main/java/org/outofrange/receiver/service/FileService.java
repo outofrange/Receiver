@@ -18,6 +18,7 @@ public class FileService {
 	public void saveFile(InputStream uploadedInputStream,  String fileName) {
         logger.debug("Saving file " + fileName);
         Validator.noSpecialCharacters(fileName);
+		Validator.notLongerThan(fileName, 255);
 
         try (OutputStream outputStream = new FileOutputStream(new File(config.getProperty("upload") + "/" + fileName))) {
 

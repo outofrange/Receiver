@@ -16,7 +16,6 @@
         <javax.ws.rs-api.version>2.0</javax.ws.rs-api.version>
     </properties>
 
-
     <build>
         <plugins>
             <plugin>
@@ -42,7 +41,6 @@
         <module>receiver-client</module>
         <module>receiver-shared</module>
     </modules>
-
 
     <inceptionYear>2014</inceptionYear>
 </project>

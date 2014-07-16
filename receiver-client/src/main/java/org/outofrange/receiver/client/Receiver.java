@@ -22,10 +22,30 @@ public class Receiver {
         this.url = url;
     }
 
-    public void sendFile(File file) throws IOException {
-        sendFile(file, file.getName());
+	/**
+	 * Send a file to the remote server. Receiver will choose a filename by itself.
+	 * @param file A reference to the existing, local file
+	 * @return The name of the remote file
+	 * @throws IOException An IOException is thrown either if the file could not be read locally,
+	 * something was wrong with the URL/connection or the server didn't respond with 200
+	 */
+    public String sendFile(File file) throws IOException {
+		// TODO use something like toBase64(SHA1(file))
+		final String fileName = file.getName();
+		sendFile(file, fileName);
+
+		return fileName;
     }
 
+	/**
+	 * Send a file to the remote server. Be careful when specifying your filename - other users are able to download
+	 * your file or overwrite them with their own files if they know or guess the right filename.
+	 *
+	 * @param file A reference to the existing, local file
+	 * @param fileName The filename which should be used by the server
+	 * @throws IOException An IOException is thrown either if the file could not be read locally,
+	 * something was wrong with the URL/connection or the server didn't respond with 200
+	 */
     public void sendFile(File file, String fileName) throws IOException {
         String encodedFileId = URLEncoder.encode(fileName, CHARSET);
 
@@ -63,8 +83,14 @@ public class Receiver {
         return new URL(s.toString());
     }
 
-    public String getFileContent(String fileId) throws IOException {
-        String encodedFileId = URLEncoder.encode(fileId, CHARSET);
+	/**
+	 * Query the server for a remote file
+	 * @param fileName The name of the remote file
+	 * @return The content of the file as a String
+	 * @throws IOException
+	 */
+    public String getFileContent(String fileName) throws IOException {
+        String encodedFileId = URLEncoder.encode(fileName, CHARSET);
         URLConnection connection = appendToUrl(url, RestPaths.FILE, RestPaths.DELIMITER,
                 encodedFileId).openConnection();
 
